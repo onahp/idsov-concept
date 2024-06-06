@@ -1,0 +1,21 @@
+---
+manifest_version: "1"
+name: zome_functions
+integrity:
+  network_seed: ~
+  properties: ~
+  origin_time: 1717658195389687
+  zomes:
+    - name: tdd_zome_integrity
+      hash: ~
+      bundled: "../../../target/wasm32-unknown-unknown/release/tdd_zome_integrity.wasm"
+      dependencies: ~
+      dylib: ~
+coordinator:
+  zomes:
+    - name: tdd_zome
+      hash: ~
+      bundled: "../../../target/wasm32-unknown-unknown/release/tdd_zome.wasm"
+      dependencies:
+        - name: tdd_zome_integrity
+      dylib: ~

@@ -1,0 +1,18 @@
+---
+manifest_version: "1"
+name: idsov-hApp-concept
+description: ~
+roles:
+  - name: zome_functions
+    provisioning:
+      strategy: create
+      deferred: false
+    dna:
+      bundled: "../dnas/zome_functions/workdir/zome_functions.dna"
+      modifiers:
+        network_seed: ~
+        properties: ~
+        origin_time: ~
+        quantum_time: ~
+      installed_hash: ~
+      clone_limit: 0
