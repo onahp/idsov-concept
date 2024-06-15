@@ -1,5 +1,6 @@
 use hdk::prelude::*;
 use tdd_zome_integrity::*;
+
 #[hdk_extern]
 pub fn create_health_record(health_record: HealthRecord) -> ExternResult<Record> {
     let health_record_hash = create_entry(
@@ -20,6 +21,7 @@ pub fn create_health_record(health_record: HealthRecord) -> ExternResult<Record>
     )?;
     Ok(record)
 }
+
 #[hdk_extern]
 pub fn get_latest_health_record(
     original_health_record_hash: ActionHash,
@@ -47,6 +49,7 @@ pub fn get_latest_health_record(
     };
     get(latest_health_record_hash, GetOptions::default())
 }
+
 #[hdk_extern]
 pub fn get_original_health_record(
     original_health_record_hash: ActionHash,
@@ -66,6 +69,7 @@ pub fn get_original_health_record(
         }
     }
 }
+
 #[hdk_extern]
 pub fn get_all_revisions_for_health_record(
     original_health_record_hash: ActionHash,
@@ -102,12 +106,14 @@ pub fn get_all_revisions_for_health_record(
     records.insert(0, original_record);
     Ok(records)
 }
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UpdateHealthRecordInput {
     pub original_health_record_hash: ActionHash,
     pub previous_health_record_hash: ActionHash,
     pub updated_health_record: HealthRecord,
 }
+
 #[hdk_extern]
 pub fn update_health_record(input: UpdateHealthRecordInput) -> ExternResult<Record> {
     let updated_health_record_hash = update_entry(
@@ -128,6 +134,7 @@ pub fn update_health_record(input: UpdateHealthRecordInput) -> ExternResult<Reco
         )?;
     Ok(record)
 }
+
 #[hdk_extern]
 pub fn delete_health_record(
     original_health_record_hash: ActionHash,
@@ -162,6 +169,7 @@ pub fn delete_health_record(
     }
     delete_entry(original_health_record_hash)
 }
+
 #[hdk_extern]
 pub fn get_all_deletes_for_health_record(
     original_health_record_hash: ActionHash,
@@ -177,6 +185,7 @@ pub fn get_all_deletes_for_health_record(
         Details::Record(record_details) => Ok(Some(record_details.deletes)),
     }
 }
+
 #[hdk_extern]
 pub fn get_oldest_delete_for_health_record(
     original_health_record_hash: ActionHash,
